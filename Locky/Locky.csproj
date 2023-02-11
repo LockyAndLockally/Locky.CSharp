@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Version>1.0.0-beta</Version>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<Description>All questions in your team about how to properly use locks can be answered with "Use Locky" from now on. It is very easy to use, because you can lock on the `string` type. There is no risk of forgetting to assign something to a static field, because Locky is static itself (or use Lockally).</Description>
+		<PackageProjectUrl>https://github.com/LockyAndLockally/Locky.CSharp#readme</PackageProjectUrl>
+		<PackageIcon>Lock.png</PackageIcon>
+		<RepositoryUrl>https://github.com/LockyAndLockally/Locky.CSharp</RepositoryUrl>
+		<PackageTags>string; locker; lock; semaphore; StringLocker; async; TryLock; LockAsync; Locky; Lockally; key</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Copyright>LockyAndLockally</Copyright>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\Lock.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>
