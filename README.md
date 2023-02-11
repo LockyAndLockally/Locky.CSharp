@@ -1,8 +1,14 @@
 # Locky
 
-All questions in your team about how to properly use locks can be answered with "Use Locky" from now on. It is very easy to use, because you can lock on the `string` type. There is no risk of forgetting to assign something to a static field, because Locky is static itself. Best of all: you can even use it in serious applications!
+All questions in your team about how to properly use locks can be answered with "Use Locky" from now on. It is very easy to use, because you can lock on `string`s. There is no risk of forgetting to assign something to a static field, because `Locky` is static itself (or use `Lockally`). Best of all: you can even use it in serious applications!
 
 Note: if you want to use `Locky` in a package, then please use `Lockally` (also included in this package) to avoid clashing with the consumer of your package.
+
+<p align="center">
+    <img src="https://avatars.githubusercontent.com/u/125100496?s=400&u=dfb896642d9b9e298628e8dd804202ed3c5e1386&v=4" alt="Locky logo"/>
+</p>
+
+Available via [NuGet](https://www.nuget.org/packages/Locky).
 
 ## What is Locky's interface?
 
@@ -94,7 +100,7 @@ public class SomeClass
 
     public void SomeMethod()
     {
-        if (!lockally.TryLock("ProcessA"))
+        if (!_lockally.TryLock("ProcessA"))
         {
             // import work is already going on, so let's skip it this time.
             return; 
@@ -105,7 +111,7 @@ public class SomeClass
         }
         finally
         {
-            Locky.Release("ProcessA");
+            _lockally.Release("ProcessA");
         }
     }
 }

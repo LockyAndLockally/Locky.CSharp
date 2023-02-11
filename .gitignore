@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Locky
+/Locky/bin/Debug
+/Locky/obj
+/Locky.Tests/bin/Debug/net6.0
+/Locky.Tests/obj/Debug/net6.0
+/Locky.Tests/obj

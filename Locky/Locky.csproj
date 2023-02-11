@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.0.0-beta</Version>
+		<Version>1.0.0</Version>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
-		<Description>All questions in your team about how to properly use locks can be answered with "Use Locky" from now on. It is very easy to use, because you can lock on the `string` type. There is no risk of forgetting to assign something to a static field, because Locky is static itself (or use Lockally).</Description>
+		<Description>All questions in your team about how to properly use locks can be answered with "Use Locky" from now on. It is very easy to use, because you can lock on `string`s via both synchronous and asynchronuos methods. Locky is static and Lockally is not (both included).</Description>
 		<PackageProjectUrl>https://github.com/LockyAndLockally/Locky.CSharp#readme</PackageProjectUrl>
 		<PackageIcon>Lock.png</PackageIcon>
 		<RepositoryUrl>https://github.com/LockyAndLockally/Locky.CSharp</RepositoryUrl>
@@ -16,6 +16,7 @@
 		<AnalysisLevel>latest</AnalysisLevel>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Copyright>LockyAndLockally</Copyright>
+		<Authors>LockyAndLockally</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>
