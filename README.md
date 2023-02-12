@@ -1,8 +1,11 @@
 # Locky
 
-All questions in your team about how to properly use locks can be answered with "Use Locky" from now on. It is very easy to use, because you can lock on `string`s. There is no risk of forgetting to assign something to a static field, because `Locky` is static itself (or use `Lockally`).
+All questions in your team about how to properly use locks can be answered with "use Locky" from now on. It is very easy to use, because you can lock on strings. There is no risk of forgetting to assign something to a static field, because `Locky` is static itself (or use `Lockally`).
 
-Note: if you want to use `Locky` in a package, then please use `Lockally` (also included in this package) to avoid clashing with the consumer of your package.
+Notes:
+
+- if you want to use Locky in a package, then please use `Lockally` (also included in this package) to avoid clashing with the consumer of your package.<br/>
+- once a string has been used as a lock, it is not removed from the dictionary that is used internally (until your app restarts). Using Locky for a few thousand different strings is probably OK, but start to think about memory usage if you have variable locks such as contract Ids.
 
 <p align="center">
     <img src="https://avatars.githubusercontent.com/u/125100496?s=100&u=dfb896642d9b9e298628e8dd804202ed3c5e1386&v=4" alt="Locky logo"/>
@@ -116,16 +119,24 @@ public class SomeClass
     }
 }
 ```
-or make a singleton available within only your library:
+or make a singleton available within only your library in two steps:
+
+Step 1: make a static container for a `Lockally` instance.
 ```csharp
-internal static class MyLocky
+namespace MyLibrary;
+
+internal static class MyLockyContainer
 {
-    public static Lockally InMyLibrary { get; } = new();
+    public static Lockally MyLocky { get; } = new();
 }
+```
+Step 2: add the container as a static global using:
+```csharp
+global using static MyLibrary.MyLockyContainer;
 ```
 and use it like this:
 ```csharp
-MyLocky.InMyLibrary.Lock("Hello world!");
+MyLocky.Lock("Hello world!");
 ```
 
 ## Tip
