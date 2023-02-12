@@ -123,6 +123,7 @@ or make a singleton available within only your library in two steps:
 
 Step 1: make a static container for a `Lockally` instance.
 ```csharp
+using LockyAndLockally;
 namespace MyLibrary;
 
 internal static class MyLockyContainer
@@ -130,11 +131,11 @@ internal static class MyLockyContainer
     public static Lockally MyLocky { get; } = new();
 }
 ```
-Step 2: add the container as a static global using:
+Step 2: add the container as a static global using to your 'Usings.cs':
 ```csharp
 global using static MyLibrary.MyLockyContainer;
 ```
-and use it like this:
+and use it like this anywhere in your project:
 ```csharp
 MyLocky.Lock("Hello world!");
 ```
