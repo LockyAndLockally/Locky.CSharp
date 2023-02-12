@@ -1,6 +1,6 @@
 # Locky
 
-All questions in your team about how to properly use locks can be answered with "use Locky" from now on. It is very easy to use, because you can lock on strings. There is no risk of forgetting to assign something to a static field, because `Locky` is static itself (or use `Lockally`).
+All questions in your team about how to properly use locks can be answered with "use Locky" from now on. It is very easy to use, because you can lock on strings via synchronous and asynchronous methods. There is no risk of forgetting to assign something to a static field, because `Locky` is static itself (or use `Lockally`).
 
 Notes:
 
