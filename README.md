@@ -1,6 +1,6 @@
 # Locky
 
-All questions in your team about how to properly use locks can be answered with "use Locky" from now on. It is very easy to use, because you can lock on strings via synchronous and asynchronous methods. There is no risk of forgetting to assign something to a static field, because `Locky` is static itself (or use `Lockally`).
+All questions in your team about how to properly use locks can be answered with "use Locky" from now on. It is very easy to use, because you can lock on strings via synchronous and asynchronous methods. There is no risk of forgetting to assign something to a static field, because `Locky` is static itself (or use `Lockally` which is also included).
 
 Notes:
 
@@ -37,21 +37,21 @@ using LockyAndLockally;
 #### Using the `Lock` method
 
 ```csharp
-Locky.Lock("ProcessA");
+Locky.Lock("Process A");
 try
 {
     // do some important work...
 }
 finally
 {
-    Locky.Release("ProcessA");
+    Locky.Release("Process A");
 }
 ```
 
 #### Using the `TryLock` method
 ```csharp
 
-if (!Locky.TryLock("ProcessB"))
+if (!Locky.TryLock("Process B"))
 {
     // important work is already going on, so let's skip it this time.
     return;
@@ -62,20 +62,20 @@ try
 }
 finally
 {
-    Locky.Release("ProcessB");
+    Locky.Release("Process B");
 }
 ```
 
 #### Using the `LockAsync` method
 ```csharp
-await Locky.LockAsync("ProcessC");
+await Locky.LockAsync("Process C");
 try
 {
     // do some important work...
 }
 finally
 {
-    Locky.Release("ProcessC");
+    Locky.Release("Process C");
 }
 ```
 
@@ -121,7 +121,7 @@ public class SomeClass
 ```
 or make a singleton available within only your library in two steps:
 
-Step 1: make a static container for a `Lockally` instance.
+Step 1: make an internal static container for a `Lockally` instance.
 ```csharp
 using LockyAndLockally;
 namespace MyLibrary;
