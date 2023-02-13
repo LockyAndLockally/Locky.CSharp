@@ -103,7 +103,7 @@ public class SomeClass
 
     public void SomeMethod()
     {
-        if (!_lockally.TryLock("ProcessA"))
+        if (!_lockally.TryLock("Process D"))
         {
             // important work is already going on, so let's skip it this time.
             return; 
@@ -114,7 +114,7 @@ public class SomeClass
         }
         finally
         {
-            _lockally.Release("ProcessA");
+            _lockally.Release("Process D");
         }
     }
 }
