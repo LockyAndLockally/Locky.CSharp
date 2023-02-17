@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.0.1</Version>
-		<TargetFramework>net6.0</TargetFramework>
+		<Version>1.1.0</Version>
+		<TargetFramework>netstandard2.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
-		<Description>All questions in your team about how to properly use locks can be answered with "Use Locky" from now on. It is very easy to use, because you can lock on `string`s via both synchronous and asynchronuos methods. Locky is static and Lockally is not (both included).</Description>
+		<Description>All questions in your team about how to properly use locks can be answered with "use Locky" from now on. It is very easy to use, because you can lock on strings via both synchronous and asynchronous methods. There is no risk of forgetting to assign something to a static field, because Locky is static itself (or use Lockally which is also included).</Description>
 		<PackageProjectUrl>https://github.com/LockyAndLockally/Locky.CSharp#readme</PackageProjectUrl>
 		<PackageIcon>Lock.png</PackageIcon>
 		<RepositoryUrl>https://github.com/LockyAndLockally/Locky.CSharp</RepositoryUrl>
-		<PackageTags>string; locker; lock; semaphore; StringLocker; async; TryLock; LockAsync; Locky; Lockally; key; avoid parallel; mutex</PackageTags>
+		<PackageTags>string; locker; lock; semaphore; StringLocker; async; TryLock; LockAsync; Locky; Lockally; key; avoid parallel; mutex; avoid race conditions</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes>See CHANGELOG.md at GitHub.</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<AnalysisLevel>latest</AnalysisLevel>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>

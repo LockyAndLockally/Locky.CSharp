@@ -26,7 +26,8 @@ public static class Locky
     /// {
     ///     Locky.Release("Process A");
     /// }
-    /// </code>    /// </summary>
+    /// </code>    
+    /// </summary>
     public static bool TryLock(string s) => Slim(s).Wait(0);
 
     /// <summary>

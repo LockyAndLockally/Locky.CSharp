@@ -7,13 +7,29 @@ public class LockyTests
     [Fact]
     public void Lock_locks()
     {
+        // Act
         Locky.Lock("LockyTest1");
+        // Assert
+        Assert.False(Locky.TryLock("LockyTest1"));
+
+        // Arrange 2
+        Locky.Release("LockyTest1");
+        // Act 2 - Lock also locks after Release
+        Locky.Lock("LockyTest1");
+        // Assert 2
         Assert.False(Locky.TryLock("LockyTest1"));
     }
 
     [Fact]
     public void TryLock_locks()
     {
+        // Act & assert 1
+        Assert.True(Locky.TryLock("LockyTest2"));
+        Assert.False(Locky.TryLock("LockyTest2"));
+
+        // Arrange 2
+        Locky.Release("LockyTest2");
+        // Act & assert 2 - TryLock also locks after Release
         Assert.True(Locky.TryLock("LockyTest2"));
         Assert.False(Locky.TryLock("LockyTest2"));
     }
@@ -60,7 +76,16 @@ public class LockyTests
     [Fact]
     public async Task LockAsync_locks()
     {
+        // Act 1
         await Locky.LockAsync("LockyTest5");
+        // Assert 1
+        Assert.False(Locky.TryLock("LockyTest5"));
+
+        // Arrange 2
+        Locky.Release("LockyTest5");
+        // Act 2
+        await Locky.LockAsync("LockyTest5");
+        // Assert 2
         Assert.False(Locky.TryLock("LockyTest5"));
     }
 
@@ -69,12 +94,14 @@ public class LockyTests
     [InlineData(false)]
     public async Task Lock_can_be_cancelled(bool shouldCancel)
     {
+        // Arrange
         var lockName = "LockyTest6" + shouldCancel;
         Locky.Lock(lockName);
         var cancellationTokenSource = new CancellationTokenSource();
 
         var task = Task.Run(() => Locky.Lock(lockName, cancellationTokenSource.Token));
 
+        // Act (or not)
         if (shouldCancel)
         {
             cancellationTokenSource.Cancel();
@@ -92,6 +119,8 @@ public class LockyTests
                 Assert.Fail("Unexpected Exception.");
             }
         }
+
+        // Assert - if waiting for `Lock` has been cancelled, then it has not been locked yet after Release.
         if (shouldCancel)
         {
             Assert.True(Locky.TryLock(lockName));
@@ -109,12 +138,14 @@ public class LockyTests
     [InlineData(false)]
     public async Task LockAsync_can_be_cancelled(bool shouldCancel)
     {
+        // Arrange
         var lockName = "LockyTest7" + shouldCancel;
         Locky.Lock(lockName);
         var cancellationTokenSource = new CancellationTokenSource();
 
         var task = Task.Run(async () => await Locky.LockAsync(lockName, cancellationTokenSource.Token));
 
+        // Act (or not)
         if (shouldCancel)
         {
             cancellationTokenSource.Cancel();
@@ -132,6 +163,8 @@ public class LockyTests
                 Assert.Fail("Unexpected Exception.");
             }
         }
+
+        // Assert - if waiting for LockAsync has been cancelled, then it has not been locked yet after Release.
         if (shouldCancel)
         {
             Assert.True(Locky.TryLock(lockName));

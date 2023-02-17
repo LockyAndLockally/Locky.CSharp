@@ -8,7 +8,16 @@ public class LockallyTests
     [Fact]
     public void Lock_locks()
     {
+        // Act
         _test1Lockally.Lock("LockallyTest1");
+        // Assert
+        Assert.False(_test1Lockally.TryLock("LockallyTest1"));
+
+        // Arrange 2
+        _test1Lockally.Release("LockallyTest1");
+        // Act 2 - Lock also locks after Release
+        _test1Lockally.Lock("LockallyTest1");
+        // Assert 2
         Assert.False(_test1Lockally.TryLock("LockallyTest1"));
     }
 
@@ -16,10 +25,15 @@ public class LockallyTests
     [Fact]
     public void TryLock_locks()
     {
+        // Act & assert 1
         Assert.True(_test2Lockally.TryLock("LockallyTest2"));
         Assert.False(_test2Lockally.TryLock("LockallyTest2"));
+        // Arrange 2
         _test2Lockally.Release("LockallyTest2");
+        // Act & assert 2 - TryLock also locks after Release
         Assert.True(_test2Lockally.TryLock("LockallyTest2"));
+        Assert.False(_test2Lockally.TryLock("LockallyTest2"));
+
     }
 
     private static Lockally _test3Lockally1 = new();
@@ -27,7 +41,9 @@ public class LockallyTests
     [Fact]
     public void Lockally_instances_are_independent_of_each_other()
     {
+        // Arrange
         Assert.True(_test3Lockally1.TryLock("LockallyTest3"));
+        // Act & assert
         Assert.True(_test3Lockally2.TryLock("LockallyTest3"));
     }
 
@@ -86,7 +102,9 @@ public class LockallyTests
     [Fact]
     public async Task LockAsync_locks()
     {
+        // Act
         await _test7Lockally.LockAsync("LockyTest7");
+        // Assert
         Assert.False(_test7Lockally.TryLock("LockyTest7"));
     }
 
@@ -97,6 +115,7 @@ public class LockallyTests
     [InlineData(false)]
     public async Task Lock_can_be_cancelled(bool shouldCancel)
     {
+        // Arrange
         var lockally = shouldCancel ? _test8LockallyTrue : _test8LockallyFalse;
         var lockName = "LockyTest6" + shouldCancel;
         lockally.Lock(lockName);
@@ -104,6 +123,7 @@ public class LockallyTests
 
         var task = Task.Run(() => lockally.Lock(lockName, cancellationTokenSource.Token));
 
+        // Act (or not)
         if (shouldCancel)
         {
             cancellationTokenSource.Cancel();
@@ -121,6 +141,8 @@ public class LockallyTests
                 Assert.Fail("Unexpected Exception.");
             }
         }
+
+        // Assert - if waiting for `Lock` has been cancelled, then it has not been locked yet after Release.
         if (shouldCancel)
         {
             Assert.True(lockally.TryLock(lockName));
@@ -139,6 +161,7 @@ public class LockallyTests
     [InlineData(false)]
     public async Task LockAsync_can_be_cancelled(bool shouldCancel)
     {
+        // Arrange
         var lockally = shouldCancel ? _test9LockallyTrue : _test9LockallyFalse;
 
         var lockName = "LockyTest7" + shouldCancel;
@@ -147,6 +170,7 @@ public class LockallyTests
 
         var task = Task.Run(async () => await lockally.LockAsync(lockName, cancellationTokenSource.Token));
 
+        // Act (or not)
         if (shouldCancel)
         {
             cancellationTokenSource.Cancel();
@@ -164,6 +188,8 @@ public class LockallyTests
                 Assert.Fail("Unexpected Exception.");
             }
         }
+
+        // Assert - if waiting for LockAsync has been cancelled, then it has not been locked yet after Release.
         if (shouldCancel)
         {
             Assert.True(lockally.TryLock(lockName));
